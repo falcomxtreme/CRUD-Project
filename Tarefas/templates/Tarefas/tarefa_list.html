@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Lista de Tarefas
+{% endblock title %}
+
+{% block content %}
+  <center><h1>Lista de Tarefas</h1></center>
+
+
+    {% if tarefa_list %}
+      <div class="form-group col-md-4">
+        <label for="StatusOrdem">Filtrar por status</label>
+        <select id="StatusOrdem" class="form-control" name="StatusOrdem">
+          <option selected>-</option>
+          <option value="Concluída">Concluída</option>
+          <option value="Em Andamento">Em Andamento</option>
+          <option value="Pendente">Pendente</option>
+        </select>
+      </div>
+
+      <table class="table">
+       <thead>
+         <tr>
+           <th scope="col">Título</th>
+           <th scope="col">Descrição</th>
+           <th scope="col">Data de Vencimento</th>
+           <th scope="col">Status</th>
+           <th scope="col">Ações</th>
+         </tr>
+       </thead>
+       <tbody>
+         {% for tarefas in tarefa_list %}
+           <tr>
+             <td>{{ tarefas.Titulo }}</td>
+             <td>{{ tarefas.Descricao }}</td>
+             <td>{{ tarefas.DataDeVencimento }}</td>
+             <td>{{ tarefas.Status }}</td>
+             <td>
+               <a href={% url "ConcluirTarefa" pk=tarefas.pk %}
+               class="btn btn-success btn-sm mb-2 {% if tarefas.DataDeFinalizacao %}
+               disabled{% endif %}">Concluir</a>              
+               <a href={% url "EditarTarefa" pk=tarefas.pk %}
+               class="btn btn-secondary btn-sm mb-2 {% if tarefas.DataDeFinalizacao %}
+               disabled{% endif %}">Editar</a>
+               <a href={% url "DeletarTarefa" pk=tarefas.pk %}
+               class="btn btn-danger btn-sm mb-2">Excluir</a>
+             </td>
+           </tr>
+         {% endfor %}
+       </tbody>
+      </table>
+    {% else %}
+      <center><H1>Não há tarefas cadastradas.</h1></center> 
+
+    {% endif %}
+     <a href="{% url 'CriarTarefa' %}" class="btn btn-primary">Nova tarefa</a>
+
+{% endblock content %}
