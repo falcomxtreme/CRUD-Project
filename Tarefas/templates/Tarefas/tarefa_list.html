@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}
     Lista de Tarefas
@@ -9,15 +11,13 @@
 
 
     {% if tarefa_list %}
-      <div class="form-group col-md-4">
-        <label for="StatusOrdem">Filtrar por status</label>
-        <select id="StatusOrdem" class="form-control" name="StatusOrdem">
-          <option selected>-</option>
-          <option value="Concluída">Concluída</option>
-          <option value="Em Andamento">Em Andamento</option>
-          <option value="Pendente">Pendente</option>
-        </select>
-      </div>
+
+      <form method="GET"> 
+        {{ filter.form|crispy }}
+
+        <button type="submit" class="btn btn-info">Filtrar</button>
+
+      </form>
 
       <table class="table">
        <thead>
