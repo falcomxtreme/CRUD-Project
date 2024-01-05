@@ -7,6 +7,10 @@ positivas que eu li sobre ela enquanto pesquisava, o proximo download é o  dj-d
 o Debug, Allowed_host e a Database mais seguras, deixando os dados das mesmas fora do f12/inspensionar do navegador, quanto ao bootstrap >= 2023.10 foi uma escolha para
 fazer um front mais clear, e aprender de maneira mais tranquila sobre o fron-end, assim como no django-crispy-forms => 2.1 que teve o mesmo proposito. Já o filter 
 django-filter foi um dos meios que achei de filtrar sem precisar pegar o código pronto, e assim aprender um pouco mais!
+
+Para executar a aplicação basta(após entrar no ambiente virtual com o Set-ExecutionPolicy -Scope Process -ExecutionPolicy ByPass(pra liberar a politica de execução) e python -m .\.venv\Scripts\activate pra entrar de fato no ambiente virtual), basta
+usar o python manage.py runserver para rodar a aplicação e clicar no link para entrar, lá você poderá cadastrar tarefas na opção
+"Nova Tarefa", Concluir, Editar, Excluir e até mesmo consultar filtrando por Status ou não! No futuro poderá até ordenar por data crescente ou ascendente!
  
 
 https://www.python.org/downloads/
