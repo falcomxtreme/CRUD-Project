@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
+<!--Título da aba-->
 
 {% block title %}
     Lista de Tarefas
@@ -9,17 +10,22 @@
 {% block content %}
   <center><h1>Lista de Tarefas</h1></center>
 
+  <!--GET pra pegar listagem por status e ordenação-->
 
   {% if tarefas %}
     <form method="GET" action="{% url 'inicio' %}"> 
 
       {{ form.as_p }}
-
+        
       <input type="submit"  value="filtrar" class="btn btn-info"></button>
+      <form method="POST" >
+
+      </select>
 
     </form>
-
-    <table class="table">
+     
+    <!--Scopo da tabela, com as informações-->
+    <table class="table" id="Tabela-Lista">
      <thead>
        <tr>
          <th scope="col">Título</th>
@@ -30,6 +36,8 @@
        </tr>
      </thead>
      
+     <!-- For para pegar cada tabela por default ou filtro no banco de dados-->
+     
      <tbody>
        {% for tarefa in tarefas %}
          <tr>
@@ -37,9 +45,12 @@
            <td>{{ tarefa.Descricao }}</td>
            <td>{{ tarefa.DataDeVencimento }}</td>
            <td>{{ tarefa.Status }}</td>
+
+           <!--Botões e funçoes para os mesmos-->
+           
            <td>
              <a href={% url "ConcluirTarefa" pk=tarefa.pk %}
-             class="btn btn-success btn-sm mb-2 {% if tarefa.DataDeFinalizacao %}
+             class="btn btn-success btn-sm mb-2 {% if tarefa.DataDeFinalizacao%}
              disabled{% endif %}">Concluir</a>              
              <a href={% url "EditarTarefa" pk=tarefa.pk %}
              class="btn btn-secondary btn-sm mb-2 {% if tarefa.DataDeFinalizacao %}
@@ -51,6 +62,8 @@
        {% endfor %}
      </tbody>
     </table>
+
+    <!--Caso não haja tarefa, deverá apresentar a seguinte mensagem-->
 
   {% else %}
     <center><H1>Não há tarefas cadastradas.</h1></center>

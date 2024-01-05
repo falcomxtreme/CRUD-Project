@@ -9,16 +9,17 @@ from .filters import FiltroDeTarefas
 
 
 def inicio(request):
-    filto_de_tarefa = FiltroDeTarefas(request.GET, queryset=Tarefa.objects.all())
+    filto_de_tarefa = FiltroDeTarefas(request.GET, queryset=Tarefa.objects.all()
+        )
     context = {
         'form': filto_de_tarefa.form,
-        'tarfa': filto_de_tarefa.qs
+        'tarefas': filto_de_tarefa.qs
     }
     return render(request, 'tarefa_list.html', context)
 
 
 class ListaDeTarefasView(ListView):
-    queryset= Tarefa.objects.all()
+    queryset = Tarefa.objects.all()
     nome_do_template = 'tarefa_list.html'
     context_object_name = 'tarefas'
     
@@ -40,6 +41,9 @@ class CriarTarefa(CreateView):
 class EditarTarefa(UpdateView):
     model = Tarefa
     fields = ["Titulo", "Descricao", "DataDeVencimento", "Status"]
+    if 'STATUS' == 'Concluída':
+        tarefa=get_object_or_404(Tarefa,pk=pk)
+        tarefa.MarcarComoCompleta
     success_url = reverse_lazy("inicio")
     
 class DeletarTarefa(DeleteView):
@@ -52,3 +56,4 @@ class ConcluirTarefa(View):
         tarefa = get_object_or_404(Tarefa, pk=pk)
         tarefa.MarcarComoCompleta()
         return redirect("inicio")
+    
