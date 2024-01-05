@@ -41,9 +41,6 @@ class CriarTarefa(CreateView):
 class EditarTarefa(UpdateView):
     model = Tarefa
     fields = ["Titulo", "Descricao", "DataDeVencimento", "Status"]
-    if 'STATUS' == 'Concluída':
-        tarefa=get_object_or_404(Tarefa,pk=pk)
-        tarefa.MarcarComoCompleta
     success_url = reverse_lazy("inicio")
     
 class DeletarTarefa(DeleteView):
