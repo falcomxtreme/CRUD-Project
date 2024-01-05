@@ -28,6 +28,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+    'rest_framework',
  ]
 
 
@@ -38,6 +39,7 @@ TERCEIROS_APPS = [
  ]
 
 MEUS_APPS = [
+    
     'Tarefas.apps.TarefasConfig',
  ]
 

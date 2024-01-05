@@ -10,50 +10,53 @@
   <center><h1>Lista de Tarefas</h1></center>
 
 
-    {% if tarefa_list %}
+  {% if tarefas %}
+    <form method="GET" action="{% url 'inicio' %}"> 
 
-      <form method="GET"> 
-        {{ filter.form|crispy }}
+      {{ form.as_p }}
 
-        <button type="submit" class="btn btn-info">Filtrar</button>
+      <input type="submit"  value="filtrar" class="btn btn-info"></button>
 
-      </form>
+    </form>
 
-      <table class="table">
-       <thead>
+    <table class="table">
+     <thead>
+       <tr>
+         <th scope="col">Título</th>
+         <th scope="col">Descrição</th>
+         <th scope="col">Data de Vencimento</th>
+         <th scope="col">Status</th>
+         <th scope="col">Ações</th>
+       </tr>
+     </thead>
+     
+     <tbody>
+       {% for tarefa in tarefas %}
          <tr>
-           <th scope="col">Título</th>
-           <th scope="col">Descrição</th>
-           <th scope="col">Data de Vencimento</th>
-           <th scope="col">Status</th>
-           <th scope="col">Ações</th>
+           <td>{{ tarefa.Titulo }}</td>
+           <td>{{ tarefa.Descricao }}</td>
+           <td>{{ tarefa.DataDeVencimento }}</td>
+           <td>{{ tarefa.Status }}</td>
+           <td>
+             <a href={% url "ConcluirTarefa" pk=tarefa.pk %}
+             class="btn btn-success btn-sm mb-2 {% if tarefa.DataDeFinalizacao %}
+             disabled{% endif %}">Concluir</a>              
+             <a href={% url "EditarTarefa" pk=tarefa.pk %}
+             class="btn btn-secondary btn-sm mb-2 {% if tarefa.DataDeFinalizacao %}
+             disabled{% endif %}">Editar</a>
+             <a href={% url "DeletarTarefa" pk=tarefa.pk %}
+             class="btn btn-danger btn-sm mb-2">Excluir</a>
+           </td>
          </tr>
-       </thead>
-       <tbody>
-         {% for tarefas in tarefa_list %}
-           <tr>
-             <td>{{ tarefas.Titulo }}</td>
-             <td>{{ tarefas.Descricao }}</td>
-             <td>{{ tarefas.DataDeVencimento }}</td>
-             <td>{{ tarefas.Status }}</td>
-             <td>
-               <a href={% url "ConcluirTarefa" pk=tarefas.pk %}
-               class="btn btn-success btn-sm mb-2 {% if tarefas.DataDeFinalizacao %}
-               disabled{% endif %}">Concluir</a>              
-               <a href={% url "EditarTarefa" pk=tarefas.pk %}
-               class="btn btn-secondary btn-sm mb-2 {% if tarefas.DataDeFinalizacao %}
-               disabled{% endif %}">Editar</a>
-               <a href={% url "DeletarTarefa" pk=tarefas.pk %}
-               class="btn btn-danger btn-sm mb-2">Excluir</a>
-             </td>
-           </tr>
-         {% endfor %}
-       </tbody>
-      </table>
-    {% else %}
-      <center><H1>Não há tarefas cadastradas.</h1></center> 
+       {% endfor %}
+     </tbody>
+    </table>
 
-    {% endif %}
-     <a href="{% url 'CriarTarefa' %}" class="btn btn-primary">Nova tarefa</a>
+  {% else %}
+    <center><H1>Não há tarefas cadastradas.</h1></center>
+
+  {% endif %}
+
+   <a href="{% url 'CriarTarefa' %}" class="btn btn-primary">Nova tarefa</a>
 
 {% endblock content %}
