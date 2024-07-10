@@ -27,15 +27,18 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_filters',
  ]
 
+#Apps de terceiros instalados
 
 TERCEIROS_APPS = [
     
     'crispy_forms',
-    'crispy_bootstrap5',   
+    'crispy_bootstrap5',
+    'django_filters', 
  ]
+
+#Meus apps
 
 MEUS_APPS = [
     
