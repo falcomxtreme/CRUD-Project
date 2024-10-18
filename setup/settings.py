@@ -1,6 +1,6 @@
 from pathlib import Path
-from decouple import config, Csv
-from dj_database_url import parse as DbUrl
+from decouple import config, Csv # type: ignore
+from dj_database_url import parse as DbUrl # type: ignore
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +35,6 @@ TERCEIROS_APPS = [
     
     'crispy_forms',
     'crispy_bootstrap5',
-    'django_filters', 
  ]
 
 #Meus apps

@@ -4,28 +4,28 @@
 <!--Título da aba-->
 
 {% block title %}
-    Lista de Tarefas
+  Lista de Tarefas
 {% endblock title %}
 
 {% block content %}
-  <center><h1>Lista de Tarefas</h1></center>
+  <h1><center>Lista de Tarefas</center></h1>
 
-  <!--GET pra pegar listagem por status e ordenação-->
-
+  <!--GET pra pegar listagem por status-->
   {% if tarefas %}
-    <form method="GET" action="{% url 'inicio' %}"> 
-
-      {{ form.as_p }}
-        
-      <input type="submit"  value="filtrar" class="btn btn-info"></button>
-      <form method="POST" >
-
-      </select>
-
-    </form>
-     
-    <!--Scopo da tabela, com as informações-->
-    <table class="table" id="Tabela-Lista">
+    <div>
+      <form method="GET" action="." class="filtro-status">
+        <label for="status">Filtrar por status:</label>
+        <select name="status" onchange="submit()" id="status">
+            <option value="">All</option>
+            {% for status_code, status_name  in opcoes_status %}
+                <option value="{{ status_code }}" {% if status_atual == status_code %}selected{% endif %}>
+                  {{ status_name }}
+                </option>
+            {% endfor %}
+        </select>
+      </form>
+    </div>
+    <table class="table">
      <thead>
        <tr>
          <th scope="col">Título</th>
@@ -41,19 +41,19 @@
      <tbody>
        {% for tarefa in tarefas %}
          <tr>
-           <td>{{ tarefa.Titulo }}</td>
-           <td>{{ tarefa.Descricao }}</td>
-           <td>{{ tarefa.DataDeVencimento }}</td>
-           <td>{{ tarefa.Status }}</td>
+           <td>{{ tarefa.titulo }}</td>
+           <td>{{ tarefa.descricao }}</td>
+           <td>{{ tarefa.data_de_vencimento }}</td>
+           <td>{{ tarefa.status }}</td>
 
            <!--Botões e funçoes para os mesmos-->
            
            <td>
              <a href={% url "ConcluirTarefa" pk=tarefa.pk %}
-             class="btn btn-success btn-sm mb-2 {% if tarefa.DataDeFinalizacao%}
+             class="btn btn-success btn-sm mb-2 {% if tarefa.data_de_finalizacao %}
              disabled{% endif %}">Concluir</a>              
              <a href={% url "EditarTarefa" pk=tarefa.pk %}
-             class="btn btn-secondary btn-sm mb-2 {% if tarefa.DataDeFinalizacao %}
+             class="btn btn-secondary btn-sm mb-2 {% if tarefa.data_de_finalizacao %}
              disabled{% endif %}">Editar</a>
              <a href={% url "DeletarTarefa" pk=tarefa.pk %}
              class="btn btn-danger btn-sm mb-2">Excluir</a>
@@ -63,13 +63,14 @@
      </tbody>
     </table>
 
-    <!--Caso não haja tarefa, deverá apresentar a seguinte mensagem-->
-
+    
   {% else %}
-    <center><H1>Não há tarefas cadastradas.</h1></center>
-
+    <!--Caso não haja tarefa, deverá apresentar a seguinte mensagem-->
+    <div id="empty">
+      <h1><center>Não há tarefas cadastradas.</center></h1>
+    </div>
   {% endif %}
 
-   <a href="{% url 'CriarTarefa' %}" class="btn btn-primary">Nova tarefa</a>
+  <a href="{% url "CriarTarefa" %}" class="btn btn-primary">Nova tarefa</a>
 
 {% endblock content %}

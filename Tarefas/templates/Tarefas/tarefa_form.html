@@ -2,29 +2,26 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    {% if tarefa.pk %}
-        Editar Tarefa
-      {% else %}
-        Criar Tarefa
-      {% endif %}
+  {% if tarefa.pk %}
+    Editar Tarefa
+  {% else %}
+    Criar Tarefa
+  {% endif %}
 
 {% endblock title %}
 
 {% block content %}
-      {% if tarefa.pk %}
-        <center><p><h1>Editar Tarefa</h1></p></center>
-      {% else %}
-        <center><p><h1>Criar Tarefa   </h1></p></center>
-      {% endif %}
+  {% if tarefa.pk %}
+    <center><p><h1>Editar Tarefa</h1></p></center>
+  {% else %}
+    <center><p><h1>Criar Tarefa</h1></p></center>
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
 
-      <form method="POST">
-        {% csrf_token %}
-
-        {{ form|crispy }}
-          
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a href="{% url "inicio" %}"
-        class="btn btn-danger">Cancelar</a>
-      </form>
-
+    <button type="submit" class="btn btn-success">Salvar</button>
+    <a href="{% url "Inicio" %}"
+    class="btn btn-danger">Cancelar</a>
+  </form>
 {% endblock content %}

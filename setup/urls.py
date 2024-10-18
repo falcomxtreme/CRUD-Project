@@ -5,9 +5,9 @@ from Tarefas.views import ListaDeTarefasView, CriarTarefa, EditarTarefa, Deletar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ListaDeTarefasView.as_view(), name="inicio"),
-    path("criar", CriarTarefa.as_view(), name="CriarTarefa"),
-    path("editar/<int:pk>", EditarTarefa.as_view(), name="EditarTarefa"),
-    path("excluir/<int:pk>", DeletarTarefa.as_view(), name="DeletarTarefa"),
-    path("concluir/<int:pk>", ConcluirTarefa.as_view(), name="ConcluirTarefa"),
+    path('', ListaDeTarefasView.as_view(), name='Inicio'),
+    path('criar', CriarTarefa.as_view(), name='CriarTarefa'),
+    path('editar/<int:pk>', EditarTarefa.as_view(), name='EditarTarefa'),
+    path('excluir/<int:pk>', DeletarTarefa.as_view(), name='DeletarTarefa'),
+    path('concluir/<int:pk>', ConcluirTarefa.as_view(), name='ConcluirTarefa'),
 ]
