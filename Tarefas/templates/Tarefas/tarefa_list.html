@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 
-<!--Título da aba-->
-
+<!-- Título da aba-->
 {% block title %}
   Lista de Tarefas
 {% endblock title %}
-
+<!-- Conteúdo-->
 {% block content %}
   <h1><center>Lista de Tarefas</center></h1>
 
@@ -25,6 +24,7 @@
         </select>
       </form>
     </div>
+    <!-- Tabela com as descrições de campo.-->
     <table class="table">
      <thead>
        <tr>
@@ -35,10 +35,8 @@
          <th scope="col">Ações</th>
        </tr>
      </thead>
-     
-     <!-- For para pegar cada tabela por default ou filtro no banco de dados-->
-     
-     <tbody>
+     <ul>
+       <!-- For para pegar cada tabela por padrão ou filtro no banco de dados.-->
        {% for tarefa in tarefas %}
          <tr>
            <td>{{ tarefa.titulo }}</td>
@@ -46,8 +44,7 @@
            <td>{{ tarefa.data_de_vencimento }}</td>
            <td>{{ tarefa.status }}</td>
 
-           <!--Botões e funçoes para os mesmos-->
-           
+           <!--Botões e funçoes para os mesmos.-->
            <td>
              <a href={% url "ConcluirTarefa" pk=tarefa.pk %}
              class="btn btn-success btn-sm mb-2 {% if tarefa.data_de_finalizacao %}
@@ -60,17 +57,14 @@
            </td>
          </tr>
        {% endfor %}
-     </tbody>
-    </table>
-
-    
+     </ul>
+    </table>    
   {% else %}
-    <!--Caso não haja tarefa, deverá apresentar a seguinte mensagem-->
+    <!-- Caso não haja tarefa, deverá apresentar a seguinte mensagem.-->
     <div id="empty">
       <h1><center>Não há tarefas cadastradas.</center></h1>
     </div>
   {% endif %}
-
+  <!-- Botão para a criação de uma nova tarefa-->
   <a href="{% url "CriarTarefa" %}" class="btn btn-primary">Nova tarefa</a>
-
 {% endblock content %}
